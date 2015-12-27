@@ -8,8 +8,12 @@ package com.javarush.test.level13.lesson06.task01;
 - Собака(Dog) может передвигаться и съесть кого-то.
 */
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 public class Solution
 {
+
 
     public interface Moveable //может двигаться
     {
