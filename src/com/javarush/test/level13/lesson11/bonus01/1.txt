@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 5
 8
 11
 3
 2
+=======
+5
+8
+11
+3
+2
+>>>>>>> 5311ecd... level13.lesson11 Done! (Thanks Vladuha)
 10
