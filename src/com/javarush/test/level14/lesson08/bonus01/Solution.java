@@ -1,15 +1,7 @@
 package com.javarush.test.level14.lesson08.bonus01;
 
-import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
-
-import java.beans.ExceptionListener;
-import java.io.CharConversionException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.nio.file.FileSystemException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /* Нашествие эксепшенов
@@ -41,94 +33,107 @@ public class Solution
         {
             exceptions.add(e);
         }
-
-        //Add your code here
         try
         {
-            Integer a = null;
-            a++;
+            int [] a = new int[-1];
         }
         catch (Exception e)
         {
             exceptions.add(e);
         }
 
-        Object ch = new Character('*');
         try
         {
-            System.out.println((Byte)ch);
-        }
-        catch(Exception e)
-        {
-            exceptions.add(e);
-        }
-
-        try
-        {
-            throw new RuntimeException();
-        }
-        catch (Exception e)
-        {
-            exceptions.add(e);
-        }
-        try
-        {
-            throw new IllegalStateException();
+            int [] a = new int[4];
+            for (int i = 0; i <= a.length; i++)
+                a[i] = i;
         }
         catch (Exception e)
         {
             exceptions.add(e);
         }
 
-        int i = 6;
-        int[] nArray = new int[5];
-
         try
         {
-            nArray[i] = i;
+            LinkedList list = new LinkedList();
+            list.get(-1);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             exceptions.add(e);
         }
 
-        String szShortString = "123";
         try
         {
-            char chr = szShortString.charAt(10);
+            Object x = new Integer(0);
+            System.out.println((String)x);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             exceptions.add(e);
         }
 
-        Object szStr[] = new String[10];
+
 
         try
         {
+            Object szStr[] = new String[10];
             szStr[0] = new Character('*');
         }
-        catch(Exception e)
+
+        catch (Exception e)
         {
             exceptions.add(e);
         }
 
-        try
-        {
-            int[] nNegArray = new int[-5];
-        }
-        catch(Exception e)
-        {
-             exceptions.add(e);
-        }
+
 
         try
         {
-            throw new ClassNotFoundException();
+            int[] nNulArray = new int[5];
+            nNulArray = null;
+            int i = nNulArray.length;
         }
         catch (Exception e)
         {
             exceptions.add(e);
         }
+
+
+
+        try
+        {
+            String szShortString = "123";
+            char chr = szShortString.charAt(10);
+        }
+        catch (Exception e)
+        {
+            exceptions.add(e);
+        }
+
+        try
+        {
+            String s = "FOOBAR";
+            int i = Integer.parseInt(s);
+            // this line of code will never be reached
+            System.out.println("int value = " + i);
+        }
+        catch (Exception e)
+        {
+            exceptions.add(e);
+        }
+
+        try {
+
+
+            throw new IllegalStateException("MyException");
+
+        }
+        catch (Exception e)
+        {
+            exceptions.add(e);
+        }
+        //Add your code here
+
     }
 }
