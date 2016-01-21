@@ -25,24 +25,26 @@ id productName price quantity
 
 import java.io.*;
 import java.nio.channels.FileChannel;
+import java.util.Scanner;
 
 public class Solution {
     public static void main(String[] args) throws Exception {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        String fileName = reader.readLine();
-        String fileName = "d:\\Dropbox\\java\\JavaRush\\JavaRushHomeWork\\src\\com\\javarush\\test\\level18\\lesson10\\bonus02\\1.txt";
+        String fileName = reader.readLine();
+//        String fileName = "d:\\Dropbox\\java\\JavaRush\\JavaRushHomeWork\\src\\com\\javarush\\test\\level18\\lesson10\\bonus02\\1.txt";
+
         String command = args[0];
         if (command.equals("-c"))
         {
             // get next id
             String nextId = getNextIdFromCrudFile(fileName);
 
-//            String line = createLine(args, nextId);
-//
-//            FileOutputStream fileOut = new FileOutputStream(fileName, true);
-//            fileOut.write(line.getBytes());
-//            fileOut.close();
+            String line = createLine(args, nextId);
+
+            FileOutputStream fileOut = new FileOutputStream(fileName, true);
+            fileOut.write(line.getBytes());
+            fileOut.close();
         }
         
         reader.close();
@@ -51,27 +53,29 @@ public class Solution {
     private static String createLine(String[] args, String nextId)
     {
         String id = nextId;                             // 8 symbols
-        String productName = args[1];                   // 60 bytes (30 chars, 30 symbols)
-        String price = args[2];                         // 8 symbols
-        String quantity = args[3];                      // 4 symbols
+        String productName = "";                        // 60 bytes (30 chars, 30 symbols)
+        for (int i = 1; i < args.length - 2; i++)
+            productName += args[i] + " ";
+        String price = args[args.length - 2];           // 8 symbols
+        String quantity = args[args.length - 1];        // 4 symbols
 
         // prepare id
-        for (int i = 0; i < (8 - id.length()); i++)
+        while (id.length() < 8)
             id += " ";
 
         // prepare productName
         if (productName.length() < 30)
-            for (int i = 0; i < (30 - productName.length()); i++)
+            while (productName.length() < 30)
                 productName += " ";
         else
-            productName = productName.substring(0, 29);
+            productName = productName.substring(0, 30);
 
         // prepare Price
-        for (int i = 0; i < (8 - price.length()); i++)
+       while(price.length() < 8)
             price += " ";
 
         // prepare quantity
-        for (int i = 0; i < (4 - quantity.length()); i++)
+        while(quantity.length() < 4)
             quantity += " ";
 
         return (id + productName + price + quantity + "\n");
@@ -79,21 +83,13 @@ public class Solution {
 
     private static String getNextIdFromCrudFile(String fileName) throws IOException
     {
-        FileInputStream fileIn = new FileInputStream(fileName);
-        // fseek()
-        FileChannel fc = fileIn.getChannel();
-        fc.position(fileIn.available() - 80); // begining of last record
+        Scanner scanner = new Scanner(new File(fileName));
+        String s = "";
+        while (scanner.hasNext())
+            s = scanner.nextLine();
 
-        // get the last id
-        byte[] buffer = new byte[80];
-        int count = fileIn.read(buffer);
-        fileIn.close();
+        int id = Integer.parseInt(s.substring(0, 8).replaceAll("[^\\d]","")) + 1;
 
-        String s = new String(buffer);//.split("\n")[1];
-
-//        int x; = Integer.parseInt(s.split(" ")[0]) + 1;
-//        String s1 = String.valueOf(x);
-        // return next id
-        return "";
+        return String.valueOf(id);
     }
 }

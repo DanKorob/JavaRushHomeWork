@@ -18,51 +18,26 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Solution {
+        private static int key = 24;
+
     public static void main(String[] args) throws IOException
     {
         String command = args[0];
         String fileName = args[1];
         String fileOutputName = args[2];
-        byte[] buffer = new byte[1000];
-        byte[] key = "javarush".getBytes();
 
         FileInputStream fileIn = new FileInputStream(fileName);
         FileOutputStream fileOut = new FileOutputStream(fileOutputName);
 
-        if (command.equals("-e"))
-        {
-            while (fileIn.available() > 0)
-            {
-                int count = fileIn.read(buffer);
-                encodeFileName(buffer, count, key);
-                fileOut.write(buffer, 0, count);
-            }
-        }
-        else if (command.equals("-d"))
-        {
-            while (fileIn.available() > 0)
-            {
-                int count = fileIn.read(buffer);
-                decodeFileName(buffer, count, key);
-                fileOut.write(buffer, 0, count);
-            }
-        }
+        while (fileIn.available() > 0)
+            fileOut.write(getCrypt(fileIn.read()));
 
         fileIn.close();
         fileOut.close();
     }
 
-    private static void decodeFileName(byte[] buffer, int count, byte[] key)
+    private static int getCrypt(int b)
     {
-        for (int i = 0; i < count; i++)
-            buffer[i] = (byte) (buffer[i] ^ key[i % key.length]);
+        return b ^ key;
     }
-
-
-    private static void encodeFileName(byte[] buffer, int count, byte[] key)
-    {
-        for (int i = 0; i < count; i++)
-            buffer[i] = (byte) (buffer[i] ^ key[i % key.length]);
-    }
-
 }
