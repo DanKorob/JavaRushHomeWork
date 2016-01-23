@@ -110,7 +110,7 @@ public class SolutionTest
 
     private void assertList(String file1, String file2, String expected)
     {
-        Solution.getCombinedLines(createlist(file1), createlist(file2));
+//        Solution.getCombinedLines(createlist(file1), createlist(file2));
         String actual = arrayLineItemToString(Solution.lines);
 
         assertEquals(expected, actual);
