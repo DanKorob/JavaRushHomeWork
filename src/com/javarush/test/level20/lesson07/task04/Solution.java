@@ -18,7 +18,7 @@ import java.util.Date;
 6) проверить, что savedObject.string равна loadedObject.string
 7) обработать исключения
 */
-public class Solution implements Serializable
+public class  Solution implements Serializable
 {
     public static void main(String[] args) throws IOException, ClassNotFoundException
     {
